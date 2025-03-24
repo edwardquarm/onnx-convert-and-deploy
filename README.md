@@ -3,7 +3,27 @@ A repository to showcase the conversion of predictive models to ONNX format and 
 
 ---
 
+## Table of Contents
+1. [Install Dependencies](#install-dependencies)
+2. [LightGBM Local Development](#lightgbm-local-development)
+3. [Convert LightGBM to ONNX Format](#convert-lightgbm-to-onnx-format)
+4. [LightGBM Deployment to KServe](#lightgbm-deployment-to-kserve)
+
+---
+
+## INSTALL DEPENDENCIES
+
+Install the required dependencies using the following command:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
 ## LIGHTGBM LOCAL DEVELOPMENT
+
+Follow these steps to set up LightGBM for local development:
 
 1. Install the [KServe Python SDK](https://github.com/kserve/kserve/tree/master/python/kserve) using `pip` or `poetry`.
 2. Install the [LightGBM Server](https://github.com/kserve/kserve/tree/master/python/lgbserver) using `poetry`.
@@ -22,9 +42,19 @@ A repository to showcase the conversion of predictive models to ONNX format and 
 
 ---
 
+## CONVERT LIGHTGBM TO ONNX FORMAT
+
+Convert a LightGBM model to ONNX format using the provided script:
+
+```bash
+python lgbm-onnx.py
+```
+
+---
+
 ## LIGHTGBM DEPLOYMENT TO KSERVE
 
-Deploy to KServe using the following example template:
+Deploy the LightGBM model to KServe using the following example template:
 
 ```yaml
 apiVersion: serving.kserve.io/v1beta1
