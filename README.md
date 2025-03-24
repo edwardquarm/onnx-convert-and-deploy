@@ -6,8 +6,13 @@ A repo to showcase the conversion of predictive models to onnx format and servin
 1. Install [KServe Python SDK](https://github.com/kserve/kserve/tree/master/python/kserve) using ``pip`` or ``peotry``
 2. Install [lgbm Server](https://github.com/kserve/kserve/tree/master/python/lgbserver) using ``peotry``
 3. Save LightGBM model in local dir ``/mnt/models/*.bst``
-4. Start the lgbm server locally by running ``python -m lgbserver --model_dir ./mnt/models/ --model_name lgb``
-    a. To display swagger UI, run ``python -m lgbserver --model_dir ./mnt/models/ --model_name lgb --enable_docs_url True``
+4. Start the lgbm server locally by running:
+
+``python -m lgbserver --model_dir ./mnt/models/ --model_name lgb``
+
+    a. To display swagger UI, run: 
+    
+``python -m lgbserver --model_dir ./mnt/models/ --model_name lgb --enable_docs_url True``
 
 # LIGHTGBM DEPLOY TO KSERVE
 Deploy to KServe using the example template:
