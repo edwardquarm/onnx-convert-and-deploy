@@ -12,7 +12,7 @@ A repo to showcase the conversion of predictive models to onnx format and servin
 # LIGHTGBM DEPLOY TO KSERVE
 Deploy to KServe using the example template:
 
-``
+```yaml
 apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:
@@ -34,5 +34,5 @@ spec:
         memory: 4Gi
       storageUri: s3://bucket/onnx_lgbm/iris.onnx
 
-``
+```
 
