@@ -2,3 +2,8 @@ onnxmltools
 lightgbm
 skl2onnx
 onnxruntime
+pandas
+keras
+tensorflow
+numpy
+tf2onnx
