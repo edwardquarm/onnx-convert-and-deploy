@@ -7,7 +7,9 @@ A repository to showcase the conversion of predictive models to ONNX format and 
 1. [Install Dependencies](#install-dependencies)
 2. [LightGBM Local Development](#lightgbm-local-development)
 3. [Convert LightGBM to ONNX Format](#convert-lightgbm-to-onnx-format)
-4. [LightGBM Deployment to KServe](#lightgbm-deployment-to-kserve)
+4. [LightGBM ONNX Deployment to KServe](#lightgbm-deployment-to-kserve)
+5. [Build Fraud Detection Keras model]
+6. []
 
 ---
 
@@ -52,9 +54,9 @@ python lgbm-onnx.py
 
 ---
 
-## LIGHTGBM DEPLOYMENT TO KSERVE
+## LIGHTGBM ONNX DEPLOYMENT TO KSERVE
 
-Deploy the LightGBM model to KServe using the following example template:
+Deploy the converted lightgbm model to KServe using the following example template:
 
 ```yaml
 apiVersion: serving.kserve.io/v1beta1
@@ -78,3 +80,7 @@ spec:
           cpu: "2"
           memory: 8Gi
 ```
+
+## BUILD EXAMPLE KERAS MODEL
+
+## DEPLOY MULTI-STAGE MODEL USING INFERENCE GRAPH
