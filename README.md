@@ -7,7 +7,9 @@ A repository to showcase the conversion of predictive models to ONNX format and 
 1. [Install Dependencies](#install-dependencies)
 2. [LightGBM Local Development](#lightgbm-local-development)
 3. [Convert LightGBM to ONNX Format](#convert-lightgbm-to-onnx-format)
-4. [LightGBM Deployment to KServe](#lightgbm-deployment-to-kserve)
+4. [LightGBM ONNX Deployment to KServe](#lightgbm-onnx-deployment-to-kserve)
+5. [Build Fraud Detection Keras Model](#build-fraud-detection-keras-model)
+6. [General Template to Deploy ONNX Model to KServe](#general-template-to-deploy-onnx-model-to-kserve)
 
 ---
 
@@ -52,9 +54,53 @@ python lgbm-onnx.py
 
 ---
 
-## LIGHTGBM DEPLOYMENT TO KSERVE
+## LIGHTGBM ONNX DEPLOYMENT TO KSERVE
 
-Deploy the LightGBM model to KServe using the following example template:
+Deploy the converted LightGBM ONNX model to KServe using the provided templates.
+
+### Custom Runtime
+
+```yaml
+apiVersion: serving.kserve.io/v1alpha1
+kind: ServingRuntime
+metadata:
+  name: lgb-onnx-runtime
+  annotations:
+    openshift.io/display-name: lgb-onnx ServingRuntime for KServe
+  labels:
+    opendatahub.io/dashboard: "true"
+spec:
+  annotations:
+    prometheus.kserve.io/port: '8080'
+    prometheus.kserve.io/path: "/metrics"
+  supportedModelFormats:
+    - name: onnx
+      version: "1"
+      autoSelect: true
+      priority: 1
+  protocolVersions:
+    - v2
+    - grpc-v2
+  containers:
+    - name: kserve-container
+      image: nvcr.io/nvidia/tritonserver:23.05-py3
+      args:
+        - tritonserver
+        - --model-store=/mnt/models
+        - --grpc-port=9000
+        - --http-port=8080
+        - --allow-grpc=true
+        - --allow-http=true
+      resources:
+        requests:
+          cpu: "1"
+          memory: 2Gi
+        limits:
+          cpu: "1"
+          memory: 2Gi
+```
+
+### Inference Service
 
 ```yaml
 apiVersion: serving.kserve.io/v1beta1
@@ -78,3 +124,15 @@ spec:
           cpu: "2"
           memory: 8Gi
 ```
+
+---
+
+## BUILD FRAUD DETECTION KERAS MODEL
+
+The notebook `keras/fraud_detection.ipynb` demonstrates an ML example to train a fraud detection model.
+
+---
+
+## GENERAL TEMPLATE TO DEPLOY ONNX MODEL TO KSERVE
+
+This section provides a general template for deploying ONNX models to KServe. Refer to the [Custom Runtime](#custom-runtime) and [Inference Service](#inference-service) sections for examples.
